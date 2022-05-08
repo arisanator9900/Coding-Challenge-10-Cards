@@ -1,6 +1,6 @@
 <script>
 import CardFace from "./components/CardFace.vue";
-import { ref } from "vue";
+import { Suspense, ref } from "vue";
 
 export default {
   name: "App",
@@ -9,14 +9,6 @@ export default {
   },
   setup() {
     const cardList = ref([])
-    // const data = ref(null)
-    // try {
-    //     const res = await fetch('api')
-    //     data.value = res.json()
-    // }
-    // catch (e) {
-    //     console.error(e)
-    // }
 
     for (let i = 0; i < 10; i++) {
       cardList.value.push({
@@ -40,13 +32,22 @@ export default {
 <template>
   <h1 class="title">Dog Api Card Flipper</h1>
     <section class="card-container">
-      <CardFace 
-      v-for="(card, index) in cardList"
-      :key="`card-${index}`"
-      :value="card.value"
-      :visible="card.visible"
-      @selectCard="flipCard"
-      />
+      <Suspense>
+        <template #default>
+          <CardFace 
+          v-for="(card, index) in cardList"
+          :key="`card-${index}`"
+          :value="card.value"
+          :visible="card.visible"
+          @selectCard="flipCard"
+          />
+        </template>
+      <template #fallback>
+          <div style="text-align: center; padding-top: 20px;">
+            Loading please wait ...
+          </div>
+      </template>
+      </Suspense>
   </section>
 </template>
 

@@ -4,12 +4,14 @@
       {{ value }}
     </div>
     <div v-else class="card-face is-back">
-      back
+      <img src="" alt="">
     </div>
   </div>
 </template>
 
 <script>
+import { Suspense, ref } from "vue";
+
 export default {
   props: {
     value: {
@@ -21,7 +23,7 @@ export default {
       default: false,
     }
   },
-  setup(props, context) {
+  async setup(props, context) {
     const selectCard = () => {
       console.log(props.value)
       context.emit('select-card', {
@@ -29,10 +31,24 @@ export default {
       })
     }
 
-    return {
-      selectCard
+    let data = ref(null)
+    let images = []
+    try {
+        const results = await fetch("https://dog.ceo/api/breeds/image/random/10");
+        data = await results.json()
+        return(data)
+        //data.message[i] will be the image selected from the json
     }
-  }
+    catch (e) {
+        console.error(e);
+    }
+  
+
+    return {
+      selectCard,
+      data
+    }
+  },
 };
 </script>
 
