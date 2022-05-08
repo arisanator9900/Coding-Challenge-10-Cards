@@ -1,6 +1,5 @@
 <script>
 import CardFace from "./components/CardFace.vue";
-import { Suspense, ref } from "vue";
 
 export default {
   name: "App",
@@ -21,7 +20,10 @@ export default {
     // const cardList = [];
 
     for (let i = 0; i < 10; i++) {
-      cardList.push(i);
+      cardList.push({
+        value: i,
+        visible: false,
+      })
     }
 
     return {
@@ -37,32 +39,13 @@ export default {
       <CardFace 
       v-for="(card, index) in cardList"
       :key="`card-${index}`"
-      :value="card"
+      :value="card.value"
+      :visible="card.visible"
       />
   </section>
 </template>
 
 <style>
-:root {
-  --white: #ffffff;
-  --white-soft: #f8f8f8;
-  --white-mute: #f2f2f2;
-
-  --black: #181818;
-  --black-soft: #222222;
-  --black-mute: #282828;
-
-  --indigo: #2c3e50;
-
-  --light-1: rgba(60, 60, 60, 0.29);
-  --light-2: rgba(60, 60, 60, 0.12);
-  --dark-1: rgba(84, 84, 84, 0.65);
-  --dark-2: rgba(84, 84, 84, 0.48);
-
-  --light-1: var(--indigo);
-  --light-2: rgba(60, 60, 60, 0.66);
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -76,14 +59,11 @@ export default {
 
 .card-container {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px;
-  grid-template-rows: 100px 100px;
-  column-gap: 30px;
-  row-gap: 30px;
+  grid-template-columns: 150px 150px 150px 150px 150px;
+  grid-template-rows: 150px 150px;
+  column-gap: 5px;
+  row-gap: 5px;
   justify-content: center;
 }
 
-.card {
-  border: 5px solid #ccc;
-}
 </style>
