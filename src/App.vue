@@ -1,5 +1,6 @@
 <script>
 import CardFace from "./components/CardFace.vue";
+import { ref } from "vue";
 
 export default {
   name: "App",
@@ -7,7 +8,7 @@ export default {
     CardFace,
   },
   setup() {
-    const cardList = []
+    const cardList = ref([])
     // const data = ref(null)
     // try {
     //     const res = await fetch('api')
@@ -17,17 +18,20 @@ export default {
     //     console.error(e)
     // }
 
-    // const cardList = [];
-
     for (let i = 0; i < 10; i++) {
-      cardList.push({
+      cardList.value.push({
         value: i,
         visible: false,
       })
     }
 
+    const flipCard = (payload) => {
+      cardList.value[payload.value].visible = true;
+    }
+
     return {
-      cardList
+      cardList,
+      flipCard,
     };
   },
 };
@@ -41,6 +45,7 @@ export default {
       :key="`card-${index}`"
       :value="card.value"
       :visible="card.visible"
+      @selectCard="flipCard"
       />
   </section>
 </template>
@@ -49,6 +54,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .title {
