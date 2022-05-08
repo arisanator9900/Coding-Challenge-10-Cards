@@ -1,22 +1,44 @@
 <script>
+import CardFace from "./components/CardFace.vue";
+import { Suspense, ref } from "vue";
+
 export default {
   name: "App",
+  components: {
+    CardFace,
+  },
+  setup() {
+    const cardList = []
+    // const data = ref(null)
+    // try {
+    //     const res = await fetch('api')
+    //     data.value = res.json()
+    // }
+    // catch (e) {
+    //     console.error(e)
+    // }
+
+    // const cardList = [];
+
+    for (let i = 0; i < 10; i++) {
+      cardList.push(i);
+    }
+
+    return {
+      cardList
+    };
+  },
 };
 </script>
 
 <template>
   <h1 class="title">Dog Api Card Flipper</h1>
-  <section class="card-container">
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
+    <section class="card-container">
+      <CardFace 
+      v-for="(card, index) in cardList"
+      :key="`card-${index}`"
+      :value="card"
+      />
   </section>
 </template>
 
