@@ -16,7 +16,6 @@
 import { Suspense, ref } from "vue";
 import DogImages from "./DogImages.vue";
 
-
 export default {
     props: {
         value: {
@@ -48,9 +47,10 @@ export default {
 .card {
   text-align: center;
   padding: 10px;
-  border: 1px solid #ccc;
   position: relative;
-  border-radius: 5px;
+}
+
+.card:hover {
   box-shadow: 2px 2px #3a3b3c;
 }
 
@@ -60,6 +60,12 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
 }
 
 .card-face.is-front {
@@ -72,7 +78,7 @@ export default {
 }
 
 .card-face.is-back {
-  background-color: blue;
-  color: white;
+  background-color: beige;
+  color: #fff;
 }
 </style>

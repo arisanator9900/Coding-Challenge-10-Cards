@@ -1,5 +1,5 @@
 <template>
-  <img class="image" :src="info" alt="dog pic" width="150" height="150" />
+  <img class="image" :src="info" alt="Loading" width="150" height="150" />
 </template>
 
 <script>
@@ -29,5 +29,6 @@ export default {
 <style>
 .image {
   overflow: hidden;
+  color: #000;
 }
 </style>
