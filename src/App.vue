@@ -1,9 +1,11 @@
 <script>
 import CardFace from "./components/CardFace.vue";
+import DogImages from "./components/DogImages.vue";
 import { Suspense, ref } from "vue";
 
+
+
 export default {
-  name: "App",
   components: {
     CardFace,
   },
@@ -18,7 +20,8 @@ export default {
     }
 
     const flipCard = (payload) => {
-      cardList.value[payload.value].visible = true;
+      //inverts the values to flip the cards
+      cardList.value[payload.value].visible = !cardList.value[payload.value].visible;
     }
 
     return {
@@ -31,24 +34,24 @@ export default {
 
 <template>
   <h1 class="title">Dog Api Card Flipper</h1>
-    <section class="card-container">
-      <Suspense>
-        <template #default>
-          <CardFace 
-          v-for="(card, index) in cardList"
-          :key="`card-${index}`"
-          :value="card.value"
-          :visible="card.visible"
-          @selectCard="flipCard"
-          />
-        </template>
-      <template #fallback>
-          <div style="text-align: center; padding-top: 20px;">
-            Loading please wait ...
-          </div>
-      </template>
-      </Suspense>
-  </section>
+  <Suspense>
+    <template #default>
+      <section class="card-container">
+        <CardFace 
+        v-for="(card, index) in cardList"
+        :key="`card-${index}`"
+        :value="card.value"
+        :visible="card.visible"
+        @selectCard="flipCard"
+        />
+      </section>
+    </template>
+    <template #fallback>
+        <div class="loading">
+          Loading please wait ...
+        </div>
+    </template>
+  </Suspense>
 </template>
 
 <style>
@@ -71,6 +74,12 @@ export default {
   column-gap: 5px;
   row-gap: 5px;
   justify-content: center;
+}
+
+.loading {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
 </style>

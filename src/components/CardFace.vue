@@ -4,51 +4,40 @@
       {{ value }}
     </div>
     <div v-else class="card-face is-back">
-      <img src="" alt="">
+      <DogImages :imageNum="value"/>
+      <!-- <img src="" alt=""> -->
     </div>
   </div>
 </template>
 
 <script>
 import { Suspense, ref } from "vue";
+import DogImages from "./DogImages.vue";
+
 
 export default {
-  props: {
-    value: {
-      Number,
-      required: true,
+    props: {
+        value: {
+            Number,
+            required: true,
+        },
+        visible: {
+            Boolean,
+            default: false,
+        },
     },
-    visible: {
-      Boolean,
-      default: false,
-    }
-  },
-  async setup(props, context) {
-    const selectCard = () => {
-      console.log(props.value)
-      context.emit('select-card', {
-        value: props.value,
-      })
-    }
-
-    let data = ref(null)
-    let images = []
-    try {
-        const results = await fetch("https://dog.ceo/api/breeds/image/random/10");
-        data = await results.json()
-        return(data)
-        //data.message[i] will be the image selected from the json
-    }
-    catch (e) {
-        console.error(e);
-    }
-  
-
-    return {
-      selectCard,
-      data
-    }
-  },
+    setup(props, context) {
+        const selectCard = () => {
+            console.log(props.value);
+            context.emit("select-card", {
+                value: props.value,
+            });
+        };
+        return {
+            selectCard,
+        };
+    },
+    components: {DogImages},
 };
 </script>
 
