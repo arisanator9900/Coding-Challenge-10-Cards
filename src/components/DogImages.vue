@@ -20,7 +20,7 @@ export default {
   },
   mounted () {
     axios
-      .get('https://dog.ceo/api/breeds/image/random/10')
+      .get('https://dog.ceo/api/breeds/image/random/1')
       .then(response => (this.info = response.data.message[0]))
   }
 }
