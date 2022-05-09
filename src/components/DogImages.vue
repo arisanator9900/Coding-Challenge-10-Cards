@@ -21,7 +21,7 @@ export default {
   mounted () {
     try {
       axios
-      .get('https://dog.ceo/api/breeds/image/random/1')
+      .get('https://dog.ceo/api/breeds/image/random/10')
       .then(response => (this.info = response.data.message[0]))
     } catch(err) {
       console.log(err)
