@@ -1,7 +1,9 @@
 <template>
   <div class="card" @click="selectCard">
     <div v-if="visible" class="card-face is-front">
-      {{ value }}
+      <h1>Header {{ value }}</h1>
+      <h4>Body {{ value }} </h4>
+      <h1>Footer {{ value }}</h1>
     </div>
     <div v-else class="card-face is-back">
       <DogImages :imageNum="value"/>
@@ -46,8 +48,10 @@ export default {
 .card {
   text-align: center;
   padding: 10px;
-  border: 5px solid #ccc;
+  border: 1px solid #ccc;
   position: relative;
+  border-radius: 5px;
+  box-shadow: 2px 2px #3a3b3c;
 }
 
 .card-face {
@@ -59,8 +63,12 @@ export default {
 }
 
 .card-face.is-front {
-  background-color: red;
+  background-color: #3a3a3a;
   color: white;
+}
+
+.card-face.is-front h1, h4, p {
+  margin-top: 10px;
 }
 
 .card-face.is-back {
