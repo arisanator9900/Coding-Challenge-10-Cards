@@ -34,24 +34,15 @@ export default {
 
 <template>
   <h1 class="title">Dog Api Card Flipper</h1>
-  <Suspense>
-    <template #default>
-      <section class="card-container">
-        <CardFace 
-        v-for="(card, index) in cardList"
-        :key="`card-${index}`"
-        :value="card.value"
-        :visible="card.visible"
-        @selectCard="flipCard"
-        />
-      </section>
-    </template>
-    <template #fallback>
-        <div class="loading">
-          Loading please wait ...
-        </div>
-    </template>
-  </Suspense>
+    <section class="card-container">
+      <CardFace 
+      v-for="(card, index) in cardList"
+      :key="`card-${index}`"
+      :value="card.value"
+      :visible="card.visible"
+      @selectCard="flipCard"
+      />
+    </section>
 </template>
 
 <style>
@@ -75,11 +66,4 @@ export default {
   row-gap: 5px;
   justify-content: center;
 }
-
-.loading {
-  text-align: center;
-  width: 100%;
-  margin-top: 10px;
-}
-
 </style>
