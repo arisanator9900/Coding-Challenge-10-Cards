@@ -29,7 +29,7 @@ export default {
     },
     setup(props, context) {
         const selectCard = () => {
-            console.log(props.value);
+            //console.log(props.value);
             context.emit("select-card", {
                 value: props.value,
             });
